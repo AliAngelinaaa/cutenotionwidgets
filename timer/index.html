@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadline Countdown</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #f7f3f7, #eae2e8);
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #9e94b8;
+            margin-bottom: 20px;
+        }
+
+        .countdown {
+            font-size: 2em;
+            color: #a4c3b2;
+            background-color: #fef6e4;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            min-width: 260px;
+            transition: transform 0.3s ease;
+        }
+
+        .countdown:hover {
+            transform: scale(1.05);
+        }
+
+        .message {
+            font-size: 1.2em;
+            color: #f4a259;
+            background-color: #f9f3f3;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            min-width: 260px;
+            transition: transform 0.3s ease;
+        }
+
+        .message:hover {
+            transform: scale(1.05);
+        }
+
+        .input-container {
+            margin: 20px 0;
+            background-color: #fef6e4;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 320px;
+            width: 100%;
+        }
+
+        input[type="datetime-local"] {
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 1em;
+            background-color: #fdf7f0;
+            width: calc(100% - 20px);
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        button {
+            background-color: #a4c3b2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #94b49f;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Deadline Countdown</h1>
+    <div class="countdown" id="countdown">Set your deadline to start!</div>
+    <div class="message" id="message"></div>
+    <div class="input-container" id="inputContainer">
+        <input type="datetime-local" id="dateInput" />
+        <button id="startButton">Start Countdown</button>
+    </div>
+
+    <script>
+        let countdownFunction;
+
+        document.getElementById("startButton").addEventListener("click", () => {
+            const dateInput = document.getElementById("dateInput").value;
+            if (dateInput) {
+                const deadline = new Date(dateInput).getTime();
+                document.getElementById("inputContainer").classList.add("hidden");
+
+                countdownFunction = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = deadline - now;
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                    let message = "";
+                    if (distance < 0) {
+                        clearInterval(countdownFunction);
+                        document.getElementById("countdown").innerHTML = "Deadline Reached!";
+                        message = "Great job! You’ve completed your task!";
+                    } else if (distance < 86400000) {
+                        message = "Almost there! The deadline is near!";
+                    } else if (distance < 604800000) {
+                        message = "You're doing great! Keep up the momentum!";
+                    } else {
+                        message = "Plenty of time! Stay focused and keep going!";
+                    }
+                    document.getElementById("message").innerHTML = message;
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
