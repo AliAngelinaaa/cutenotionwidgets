@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Count Progress Bar</title>
+    <style>
+        .progress-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: #4CAF50;
+            transition: width 0.5s ease-in-out, background-color 0.3s ease;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: #333;
+        }
+        .theme-selector {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .color-btn {
+            padding: 8px 12px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .color-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <h2 style="text-align: center; color: #666;">✨ Writing Progress ✨</h2>
+        <div class="theme-selector">
+            <button class="color-btn" style="background-color: #FFB3BA;" onclick="changeTheme('#FFB3BA')">Pink</button>
+            <button class="color-btn" style="background-color: #BAFFC9;" onclick="changeTheme('#BAFFC9')">Mint</button>
+            <button class="color-btn" style="background-color: #BAE1FF;" onclick="changeTheme('#BAE1FF')">Blue</button>
+            <button class="color-btn" style="background-color: #FFFFBA;" onclick="changeTheme('#FFFFBA')">Yellow</button>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
+        </div>
+        <div class="stats">
+            <span id="currentWords">0 words</span>
+            <span id="targetWords">Target: 1000 words</span>
+        </div>
+        <div style="margin-top: 20px;">
+            <input type="number" id="wordInput" placeholder="Enter word count">
+            <button onclick="updateProgress()">Update Progress</button>
+            <button onclick="setTarget()">Set Target</button>
+        </div>
+    </div>
+
+    <script>
+        let currentWordCount = 0;
+        let targetWordCount = 1000;
+
+        function updateProgress() {
+            const input = document.getElementById('wordInput');
+            const progressBar = document.getElementById('progressBar');
+            const currentColor = progressBar.style.backgroundColor || '#4CAF50';
+            
+            currentWordCount = parseInt(input.value) || 0;
+            const percentage = Math.min((currentWordCount / targetWordCount) * 100, 100);
+            
+            progressBar.style.width = percentage + '%';
+            progressBar.style.backgroundColor = currentColor;
+            document.getElementById('currentWords').textContent = currentWordCount + ' words';
+            input.value = '';
+        }
+
+        function setTarget() {
+            const newTarget = prompt('Enter target word count:', targetWordCount);
+            if (newTarget && !isNaN(newTarget)) {
+                targetWordCount = parseInt(newTarget);
+                document.getElementById('targetWords').textContent = 'Target: ' + targetWordCount + ' words';
+                updateProgress();
+            }
+        }
+
+        function changeTheme(color) {
+            document.getElementById('progressBar').style.backgroundColor = color;
+        }
+    </script>
+</body>
+</html>
