@@ -87,6 +87,7 @@
         </div>
         <div style="margin-top: 20px; text-align: center;">
             <input type="number" id="wordInput" placeholder="Enter word count" style="padding: 10px; border-radius: 10px; border: 1px solid #E0E0E0; background-color: #FAF3E0; width: 200px; margin-right: 10px;">
+            <input type="number" id="targetInput" placeholder="Set target word count" style="padding: 10px; border-radius: 10px; border: 1px solid #E0E0E0; background-color: #FAF3E0; width: 200px; margin-right: 10px;">
             <button class="action-btn" style="background-color: #FFB3BA;" onclick="updateProgress()">Update Progress</button>
             <button class="action-btn" style="background-color: #BAFFC9;" onclick="setTarget()">Set Target</button>
         </div>
@@ -99,21 +100,21 @@
         function updateProgress() {
             const input = document.getElementById('wordInput');
             const progressBar = document.getElementById('progressBar');
-            const currentColor = progressBar.style.backgroundColor || '#4CAF50';
+            const pastelPurple = '#D6C3E0'; // Pastel purple color
             
             currentWordCount = parseInt(input.value) || 0;
             const percentage = Math.min((currentWordCount / targetWordCount) * 100, 100);
             
             progressBar.style.width = percentage + '%';
-            progressBar.style.backgroundColor = currentColor;
+            progressBar.style.backgroundColor = pastelPurple; // Set to pastel purple
             document.getElementById('currentWords').textContent = currentWordCount + ' words';
             input.value = '';
         }
 
         function setTarget() {
-            const newTarget = prompt('Enter target word count:', targetWordCount);
-            if (newTarget && !isNaN(newTarget)) {
-                targetWordCount = parseInt(newTarget);
+            const newTarget = parseInt(document.getElementById('targetInput').value);
+            if (!isNaN(newTarget)) {
+                targetWordCount = newTarget;
                 document.getElementById('targetWords').textContent = 'Target: ' + targetWordCount + ' words';
                 updateProgress();
             }

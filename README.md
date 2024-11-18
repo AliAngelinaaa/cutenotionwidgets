@@ -2,7 +2,7 @@
 A collection of custom widgets for Notion pages.
 
 ## Available Widgets
-- [Clock Widget](https://aliangelinaaa.github.io/cutenotionwidgets/wordCount/)
+- [Word Count Widget](https://aliangelinaaa.github.io/cutenotionwidgets/wordCount/)
 - [Weather Widget](https://aliangelinaaa.github.io/cutenotionwidgets/weather)
 <!-- Add more widgets as you create them -->
 
