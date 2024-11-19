@@ -6,6 +6,7 @@ A collection of custom widgets for Notion pages.
 - [Weather Widget](https://aliangelinaaa.github.io/cutenotionwidgets/weather)
 <!-- Add more widgets as you create them -->
 
+
 ## How to Use
 1. Choose a widget from the list above
 2. Copy the widget's URL
