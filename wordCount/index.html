@@ -102,7 +102,7 @@
             const progressBar = document.getElementById('progressBar');
             const pastelPurple = '#D6C3E0'; // Pastel purple color
             
-            currentWordCount = parseInt(input.value) || 0;
+            currentWordCount += parseInt(input.value) || 0;
             const percentage = Math.min((currentWordCount / targetWordCount) * 100, 100);
             
             progressBar.style.width = percentage + '%';

@@ -4,8 +4,8 @@ A collection of custom widgets for Notion pages.
 ## Available Widgets
 - [Word Count Widget](https://aliangelinaaa.github.io/cutenotionwidgets/wordCount/)
 - [Weather Widget](https://aliangelinaaa.github.io/cutenotionwidgets/weather)
+- [Idea Capturer Widget](https://aliangelinaaa.github.io/cutenotionwidgets/ideaCapture/)
 <!-- Add more widgets as you create them -->
-
 
 ## How to Use
 1. Choose a widget from the list above
